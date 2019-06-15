@@ -1,0 +1,21 @@
+{
+    "name": "MrApr/M-Curl",
+    "description": "Light and simple library for curl Operations",
+    "type": "library",
+    "license": "MIT",
+    "version": "Beta",
+    "authors": [
+        {
+            "name": "Mr-Apr",
+            "email": "admin@aprtech.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\" : "core"
+        }
+    },
+    "require": {
+        "php": ">=7.1.3"
+    }
+}
