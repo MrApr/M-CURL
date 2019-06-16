@@ -3,7 +3,6 @@
     "description": "Light and simple library for curl Operations",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Mr-Apr",
