@@ -111,6 +111,43 @@ class Curl
         }
     }
 
+    public function getStatusCode()
+    {
+        if(empty($this->ch))
+        {
+            $this->init();
+        }
+
+        curl_setopt($this->ch,CURLOPT_URL,self::$url);
+        curl_setopt($this->ch,CURLOPT_ENCODING,"utf8");
+        curl_setopt($this->ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($this->ch,CURLOPT_CUSTOMREQUEST,$this->method);
+
+        if(!empty($this->content_type))
+        {
+            curl_setopt($this->ch,CURLOPT_HTTPHEADER,$this->content_type);
+        }
+
+        if(!empty($this->post_fields))
+        {
+            curl_setopt($this->ch,CURLOPT_POSTFIELDS,json_encode($this->post_fields));
+        }
+
+        try{
+            $result = curl_exec($this->ch);
+            $curl_info = curl_getinfo($this->ch);
+            $status_code = $curl_info['http_code'];
+            $curl_error = curl_error($this->ch);
+        }catch (\Exception $e)
+        {
+            return $this->resualtGenerator('500',$e->getMessage());
+        }
+        finally{
+            curl_close($this->ch);
+        }
+        return $status_code;
+    }
+
     public function resualtGenerator(int $status,string $message)
     {
         $message = array(
